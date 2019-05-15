@@ -1,0 +1,17 @@
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\XUnitTestProject1.deps.json
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\XUnitTestProject1.runtimeconfig.json
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\XUnitTestProject1.runtimeconfig.dev.json
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\XUnitTestProject1.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\XUnitTestProject1.pdb
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.csproj.CoreCompileInputs.cache
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.AssemblyInfoInputs.cache
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.AssemblyInfo.cs
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.pdb
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\ConsoleApp1.dll
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\bin\Debug\netcoreapp2.1\ConsoleApp1.pdb
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.csprojAssemblyReference.cache
+C:\Users\OTB_Backend\source\repos\XUnitTestProject1\XUnitTestProject1\obj\Debug\netcoreapp2.1\XUnitTestProject1.csproj.CopyComplete
