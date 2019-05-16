@@ -14,10 +14,18 @@ namespace XUnitTestProject1
             var result = calculator.Divide(5);
             Assert.IsType<decimal>(result);
 
-            Assert.Throws<DivideByZeroException>(() => {
+            try
+            {
                 result = calculator.Divide(0);
                 Assert.IsType<decimal>(result);
-            });
+            }
+            catch
+            {
+                Assert.Throws<DivideByZeroException>(() => {
+                    result = calculator.Divide(0);
+                    Assert.IsType<decimal>(result);
+                });
+            }
         }
 
         [Fact]
@@ -28,10 +36,18 @@ namespace XUnitTestProject1
             var result = calculator.Divide(5, 10);
             Assert.IsType<decimal>(result);
 
-            Assert.Throws<DivideByZeroException>(() => {
-                result = calculator.Divide(5,0,10);
+            try
+            {
+                result = calculator.Divide(5, 0, 10);
                 Assert.IsType<decimal>(result);
-            });
+            }
+            catch
+            {
+                Assert.Throws<DivideByZeroException>(() => {
+                    result = calculator.Divide(5, 0, 10);
+                    Assert.IsType<decimal>(result);
+                });
+            }
         }
 
         [Fact]
@@ -42,10 +58,18 @@ namespace XUnitTestProject1
             var result = calculator.Divide(5, 10, -3.5M, -2, 5, -0.5M);
             Assert.IsType<decimal>(result);
 
-            Assert.Throws<DivideByZeroException>(() => {
+            try
+            {
                 result = calculator.Divide(5, 10, -3.5M, 0, -2, 5, -0.5M);
                 Assert.IsType<decimal>(result);
-            });
+            }
+            catch
+            {
+                Assert.Throws<DivideByZeroException>(() => {
+                    result = calculator.Divide(5, 10, -3.5M, 0, -2, 5, -0.5M);
+                    Assert.IsType<decimal>(result);
+                });
+            }
         }
     }
 }
