@@ -1,41 +1,42 @@
 ﻿using System;
-using System.Linq;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace utests
 {
     public class Calculator
     {
-        decimal result { get; set; }
-        bool useMemory { get; set; }
+        public decimal result { get; set; }
+        public bool useMemory { get; set; }
         Calculator calcul { get; set; }
         Calculator tempcalcul { get; set; }
+        public static List<decimal> lastOperationResult { get; set; } = new List<decimal>();
 
         public Calculator()
         {
-            this.result = 0;
-            this.useMemory = true;
+            result = 0;
+            useMemory = true;
         }
 
         public decimal Sum(params decimal[] numbers)
         {
             for(int i=0; i < numbers.Length; i++)
             {
-                this.result += numbers[i];
+                result += numbers[i];
             }
-            return this.result;
+            return result;
         }
 
         public decimal Minus(params decimal[] numbers)
         {
-            if (!this.useMemory)
+            if (!useMemory)
             {
-                this.result = numbers[0];
+                result = numbers[0];
                 if(numbers.Length > 1)
                 {
                     for (int i = 1; i < numbers.Length; i++)
                     {
-                        this.result -= numbers[i];
+                        result -= numbers[i];
                     }
                 }
             }
@@ -43,78 +44,86 @@ namespace utests
             {
                 for (int i = 0; i < numbers.Length; i++)
                 {
-                        this.result -= numbers[i];
+                        result -= numbers[i];
                 }
             }
-            return this.result;
+            return result;
         }
 
         public decimal Multiply(params decimal[] numbers)
         {
-            if(this.result==0)
+            if(result==0)
             {
-                this.result = 1;
+                result = 1;
             }
 
             for (int i = 0; i < numbers.Length; i++)
             {
-                this.result *= numbers[i];
+                result *= numbers[i];
             }
-            return this.result;
+            return result;
         }
 
         public decimal Divide(params decimal[] numbers)
         {
-            if (this.result == 0)
+            if (result == 0)
             {
-                this.result = numbers[0];
-                return this.result;
+                result = numbers[0];
+                return result;
             }
             for (int i = 0; i < numbers.Length; i++)
             {
-                this.result /= numbers[i];
+                try
+                {
+                    result /= numbers[i];
+                }
+                catch(DivideByZeroException)
+                {
+                    Console.WriteLine("Can't divide By {0}", numbers[i]);
+                }
             }
-            return this.result;
+            return result;
         }
 
         public void setMemory(bool use)
         {
-            this.useMemory = use;
+            useMemory = use;
         }
 
         public void initCalcul()
         {
-            this.calcul = new Calculator();
-            this.tempcalcul = new Calculator();
+            calcul = new Calculator();
+            tempcalcul = new Calculator();
         }
 
         public Calculator getCalcul()
         {
-            return this.calcul;
+            return calcul;
         }
 
         public Calculator getTempcalcul()
         {
-            return this.tempcalcul;
+            return tempcalcul;
         }
 
         public void Reset()
         {
-            this.result = 0;
+            result = 0;
         }
 
-        public static Calculator GenerateCalculator()
+        public static void GenerateCalculator()
         {
             //5+3-(2*4+5)+63-(4/2+1)+9
             Calculator calc = new Calculator();
-            calc.initCalcul();
-            Calculator calcul = calc.getCalcul();
-            Calculator tempcalcul = calc.getTempcalcul();
             string result;
             string tryagain;
+            lastOperationResult.Add(0);
 
             do
             {
+                calc.initCalcul();
+                Calculator calcul = calc.getCalcul();
+                Calculator tempcalcul = calc.getTempcalcul();
                 Console.WriteLine("Begin Calculation");
                 var input = Console.ReadLine();
                 string str = input.ToString();
@@ -127,19 +136,55 @@ namespace utests
                 str = str.Replace(")", "");
 
                 result = doOperations(calcul, tempcalcul, str);
+                int lastIndex = lastOperationResult.Count;
+                if(lastIndex > 0)
+                {
+                    lastIndex = lastIndex - 1;
+                }
+                Console.WriteLine("Last index: " + Convert.ToString(lastIndex));
+                decimal resultM = Convert.ToDecimal(result) + lastOperationResult[lastIndex];
 
                 Console.WriteLine("Actual total:");
-                Console.WriteLine(result);
+                Console.WriteLine(resultM);
 
-                Console.WriteLine("Try again? Y/N");
+                Console.WriteLine("Continue with other operation? C");
+                Console.WriteLine("Make a new operation? M");
+                if(lastOperationResult.Count > 1)
+                {
+                    Console.WriteLine("Show operations result history? H");
+                }
+                Console.WriteLine("Terminate? T");
                 input = Console.ReadLine();
                 tryagain = input.ToString().ToLower();
+                lastOperationResult.Add(resultM);
+                if (tryagain == "m")
+                {
+                    lastOperationResult = new List<decimal>();
+                    lastOperationResult.Add(0);
+                }
+                else if(tryagain == "h")
+                {
+                    Console.WriteLine("Operations History");
+                    for (int ind = 0; ind < lastOperationResult.Count; ind++)
+                    {
+                        Console.WriteLine("Operation result " + ind + " is " + lastOperationResult[ind]);
+                    }
+                }
+                else if(tryagain != "t")
+                {
+                    Console.WriteLine("Continue with other operation? C");
+                    Console.WriteLine("Make a new operation? M");
+                    if (lastOperationResult.Count > 1)
+                    {
+                        Console.WriteLine("Show operations result history? H");
+                    }
+                    Console.WriteLine("Terminate? T");
+                }
             }
-            while (tryagain == "y");
-            return calcul;
+            while (tryagain != "t");
         }
 
-        private static string doOperations(Calculator calcul, Calculator tempcalcul, string expressionString)
+        protected static string doOperations(Calculator calcul, Calculator tempcalcul, string expressionString)
         {
             Operate(ref calcul, ref tempcalcul, ref expressionString, "*");
             Operate(ref calcul, ref tempcalcul, ref expressionString, "/");
@@ -150,7 +195,7 @@ namespace utests
             return expressionString;
         }
 
-        private static void Operate(ref Calculator calcul, ref Calculator tempcalcul, ref string expressionString, string sign)
+        protected static void Operate(ref Calculator calcul, ref Calculator tempcalcul, ref string expressionString, string sign)
         {
             
             string Rstring = @"\-?\d+\+\-?\d+";
